@@ -1,0 +1,25 @@
+{
+  "name": "oliphant",
+  "version": "0.1.0",
+  "description": "The only app template you'll ever need",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jackp/oliphant"
+  },
+  "author": "Jack Parker",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "gitHead": "f3745340c0c827be45199deb485670a86a42c7f6",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-watch": "~0.4.3",
+    "grunt-express": "~0.3.3"
+  },
+  "dependencies": {
+    "express": "~3.2.4"
+  }
+}
