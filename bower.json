@@ -7,14 +7,13 @@
     "components"
   ],
   "devDependencies": {
-    "requirejs": "~2.1.6",
-    "requirejs-tpl": "latest"
+    "requirejs": "~2.1.6"
   },
   "dependencies": {
     "backbone-amd": "~1.0.0",
     "underscore-amd": "~1.4.4",
     "jquery": "~2.0.0",
-    "backbone.marionette": "~1.0.2",
-    "bootstrap": "~2.1.1"
+    "bootstrap": "~2.1.1",
+    "layoutmanager-amd": "latest"
   }
 }

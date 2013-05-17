@@ -5,14 +5,18 @@ var app = express();
 
 // Config
 app.configure(function(){
+
 });
 
 app.configure('development', function(){
-	app.use(express.static(path.resolve('./app/client')));
+	app.use(express.static(path.resolve(__dirname, '../client')));
 })
+// API routes go here
+
 // Main Route
-app.get('/', function(req, res){
-	res.sendfile(path.resolve('./app/client/index-dev.html'));
+app.get('*', function(req, res){
+	res.sendfile(__dirname + '/index-dev.html');
 });
 
-module.exports = app;
+app.listen(3000);
+// module.exports = app;

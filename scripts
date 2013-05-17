@@ -1,0 +1,42 @@
+define([
+	'marionette', 'backbone', 'controller'
+], function(Marionette, Backbone, Controller){
+	var App = new Marionette.Application();
+
+	// Router & Link Handler
+	App.addInitializer(function(options){
+		var Router = Backbone.Marionette.AppRouter.extend({
+			appRoutes : {
+				"" : "landing",
+				"test" : "test"
+			},
+			controller : Controller
+		});
+
+		var AppRouter = new Router();
+
+		Backbone.history.start({pushState: true});
+
+		// Link Handler
+		$('body').on('click', 'a[href!=#][target!=_blank]', function(e){
+
+			var link = $(this).attr('href');
+
+			if(typeof(link)!='undefined' && !link.match(/^(?:https?|mailto):\/\/.*/) && !link.match(/^#.*/) && !link.match(/javascript/)) { // TODO: Find way to combine these into 1 regex
+		    e.preventDefault();
+
+		    AppRouter.navigate(link, true);
+		  }
+		});
+	});
+
+	// Setup Regions
+	App.addRegions({
+		headerRegion : "#header",
+		mainRegion : "#main-content",
+		footerRegion : "#footer"
+	});
+
+	// Export app
+	return App;
+});

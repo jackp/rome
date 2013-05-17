@@ -1,12 +1,18 @@
-define(['marionette'], function(Marionette){
-	var App = require('App');
-	
-	return Marionette.appRouter.extend({
+define([
+	'jquery',
+	'underscore',
+	'backbone'
+	// views
+], function($, _, Backbone){
+	var AppRouter = Backbone.Router.extend({
 		routes : {
-			"test" : "test"
+			"" : "landing"
 		},
-		test : function(){
-
+		// Landing Router
+		landing : function(){
+			alert('landing page');
 		}
 	});
+
+	return AppRouter;
 });
