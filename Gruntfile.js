@@ -37,13 +37,12 @@ module.exports = function(grunt){
 				files : [{expand: true, src: ['app/**/*.js'], dest: '.build/'}]
 			},
 			html : {
-				files : [{expand: true, src: ['app/client/*.html'], dest: '.build/'}]
+				files : [{expand: true, src: ['app/server/*.html'], dest: '.build/'}]
 			}
 		},
 		jst : {
 			compile : {
 				options : {
-					namespace : 'App.Templates',
 					processName : function(filename){
 						return path.basename(filename, '.html');
 					},
@@ -73,19 +72,18 @@ module.exports = function(grunt){
 					nospawn : true
 				}
 			},
-			coffeescript : {
-				files : ['app/**/*.coffee'],
-				tasks : ['coffee:compile'],
-				options : {
-					livereload : true,
-					nospawn : true
-				}
-			}
+			// coffeescript : {
+			// 	files : ['app/**/*.coffee'],
+			// 	tasks : ['coffee:compile'],
+			// 	options : {
+			// 		livereload : true,
+			// 		nospawn : true
+			// 	}
+			// }
 		}
 	});
 
 	grunt.event.on('watch', function(action, filepath){
-		console.log(action);
 		// After initial load, only run tasks on individual changed file
 		grunt.config(['copy', 'scripts'], {
 			files : [{expand: true, src: [filepath], dest: '.build/'}]

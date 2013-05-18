@@ -1,36 +1,46 @@
 define([
-	'jquery',
-	'underscore',
-	'backbone',
+	// Plugins
 	'layoutmanager',
-	'router'
-], function($, _, Backbone, LayoutManager, Router){
-	var initialize = function(){
-		// Start Router
-		var AppRouter = new Router();
-
-		Backbone.history.start({pushState: true});
-
-		// Link Handler
-		$('body').on('click', 'a[href!=#][target!=_blank]', function(e){
-
-			var link = $(this).attr('href');
-
-			if(typeof(link)!='undefined' && !link.match(/^(?:https?|mailto):\/\/.*/) && !link.match(/^#.*/) && !link.match(/javascript/)) { // TODO: Find way to combine these into 1 regex
-		    e.preventDefault();
-
-		    AppRouter.navigate(link, true);
-		  }
-		});
-
-		// Configure Backbone.Layout
-		Backbone.Layout.configure({
-			manage: true
-		});
-
+	'templates'
+], function(){
+	var app = {
+		root : '/'
 	};
 
-	return {
-		initialize : initialize
-	}
+	var JST = window.JST = window.JST || {};
+
+	// Configure LayoutManager
+	Backbone.Layout.configure({
+		manage : true,
+		fetch : function(path){
+			if(JST[path]){
+				return JST[path];
+			} else {
+				console.log('No template found:' + path)
+			}
+		}
+	});
+
+	// Add events, modules, layout management to app
+	return _.extend(app, {
+		// Custom module object
+		module : function(additionalProps){
+			return _.extend({ Views: {}}, additionalProps);
+		},
+		// Layout Helper
+		useLayout : function(name, options){
+			options = options || {};
+
+			if(_.isString(name)){
+				options.template = name;
+			}
+
+			// Create new Layout
+			var layout = new Backbone.Layout(_.extend({
+				el : "#main"
+			}, options));
+
+			return this.layout = layout;
+		}
+	}, Backbone.Events)
 });

@@ -1,18 +1,23 @@
 define([
-	'jquery',
-	'underscore',
-	'backbone'
-	// views
-], function($, _, Backbone){
-	var AppRouter = Backbone.Router.extend({
+	'app',
+	// Modules
+	// "modules/landing",
+	// "modules/dashboard"
+], function(app){
+
+	var Router = Backbone.Router.extend({
 		routes : {
-			"" : "landing"
+			"" : "landing",
+			"test" : "test" 
 		},
 		// Landing Router
 		landing : function(){
-			alert('landing page');
+			app.useLayout('landing').render();
+		},
+		test : function(){
+			app.useLayout('test').render();
 		}
 	});
 
-	return AppRouter;
+	return Router;
 });
